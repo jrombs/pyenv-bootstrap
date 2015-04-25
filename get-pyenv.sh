@@ -29,7 +29,6 @@ git clone -q --depth 1 --branch "$VER" 'ssh://git@github.com/cschcs/pyenv' "$PYE
 if [ $ERROR -ne 0 ]; then
     rm -rf "$PYENV_BRANCH_DIR" || :
 else
-    rm -rf "$PYENV_BRANCH_DIR/.git"
     echo "$PYENV_BRANCH_DIR"
 fi
 exit $ERROR
