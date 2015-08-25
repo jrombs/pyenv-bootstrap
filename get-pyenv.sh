@@ -25,7 +25,12 @@ curl -L -s -o "$PYENV_DIR/get-pyenv.sh" 'https://raw.githubusercontent.com/cschc
 
 ERROR=0
 echo "Retrieving PyEnv $VER into '$PYENV_BRANCH_DIR'" >&2
-git clone -q --depth 1 --branch "$VER" 'git://github.com/cschcs/pyenv' "$PYENV_BRANCH_DIR" || ERROR=$?
+(
+  git clone -v 'git://github.com/cschcs/pyenv' "$PYENV_BRANCH_DIR"
+  cd "$PYENV_BRANCH_DIR"
+  git fetch origin 'refs/pull/*/head:refs/remotes/origin/pr/*'
+  git checkout "$VER"
+) || ERROR=$?
 if [ $ERROR -ne 0 ]; then
     rm -rf "$PYENV_BRANCH_DIR" || :
 else
